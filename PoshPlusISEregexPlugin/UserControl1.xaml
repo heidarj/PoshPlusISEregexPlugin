@@ -4,19 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PoshPlusISEregexPlugin"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             MinWidth="400" MinHeight="600">
+             mc:Ignorable="d" d:DesignWidth="300"
+             MinWidth="300" MinHeight="700" >
     <Grid>
-        <Button x:Name="button" Content="Button" VerticalAlignment="Top" Width="100" Height="23" HorizontalAlignment="Right" Margin="0,188,10,0" Click="button_Click"/>
-        <TextBox x:Name="textBox" Height="23" Margin="10,188,115,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" TextChanged="textBox_TextChanged"/>
-        <DataGrid x:Name="dataGrid" Margin="10,216,10,10"/>
         <ComboBox x:Name="comboBox" Margin="10,110,10,0" VerticalAlignment="Top"/>
-        <Label x:Name="label" Content="Powershell Plus Regex Tools" Margin="10,10,10,0" VerticalAlignment="Top" Height="44" FontSize="24"/>
-        <Separator HorizontalAlignment="Left" Height="10" Margin="10,59,0,0" VerticalAlignment="Top" Width="380"/>
-        <Label x:Name="label1" Content="Insert Regex snippets" Margin="10,74,10,0" VerticalAlignment="Top" FontSize="16"/>
-        <Separator HorizontalAlignment="Left" Height="10" Margin="10,137,0,0" VerticalAlignment="Top" Width="380"/>
-        <Label x:Name="label1_Copy" Content="Regex match current document" Margin="10,152,10,0" VerticalAlignment="Top" FontSize="16"/>
-
+        <Label x:Name="label" Content="Powershell Plus Regex Tools" Margin="10,10,10,0" FontSize="24" Height="42" VerticalAlignment="Top"/>
+        <Separator Margin="10,59,10,0" Height="10" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Insert Regex snippets" Margin="10,74,10,0" FontSize="16" Height="31" VerticalAlignment="Top"/>
+        <Separator Height="10" Margin="10,332,10,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy" Content="Regex match current document" VerticalAlignment="Top" FontSize="16" Margin="10,347,10,0"/>
+        <Button x:Name="button" Content="Match all" VerticalAlignment="Top" Width="100" Height="23" HorizontalAlignment="Right" Click="button_Click" Margin="0,383,10,0"/>
+        <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" TextChanged="textBox_TextChanged" Margin="10,383,115,0"/>
+        <DataGrid x:Name="dataGrid" Margin="10,411,10,10"></DataGrid>
+        <Separator Margin="10,137,10,0" Height="10" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy1" Content="Regex cheat sheet" Margin="10,152,10,0" FontSize="16" Height="31" VerticalAlignment="Top"/>
+        <DataGrid x:Name="cheetSheetGrid" HorizontalAlignment="Left" Margin="10,188,0,0" VerticalAlignment="Top" Height="139" Width="280"/>
     </Grid>
 </UserControl>

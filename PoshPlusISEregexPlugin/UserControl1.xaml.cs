@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using Microsoft.PowerShell.Host.ISE;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Management.Automation;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace PoshPlusISEregexPlugin
 {
@@ -23,7 +26,13 @@ namespace PoshPlusISEregexPlugin
     /// </summary>
     public partial class UserControl1 : IAddOnToolHostObject
     {
-        public List<datagridRegexMatch> regexSearchMatches = new List<datagridRegexMatch>();
+        public ScriptBlock WriteErrorToShell(string e)
+        {
+            ScriptBlock regexErrorScriptblock = ScriptBlock.Create("wite-error " + e);
+            return regexErrorScriptblock;
+        }
+
+        public List<DatagridRegexMatch> regexSearchMatches = new List<DatagridRegexMatch>();
 
         public UserControl1()
         {
@@ -53,7 +62,12 @@ namespace PoshPlusISEregexPlugin
 
             if (textBox.Text != null && editor.Text != null)
             {
-                Regex rgx = new Regex(Regex.Escape(textBox.Text));
+                Regex rgx;
+                try { rgx = new Regex(textBox.Text); }
+                catch (ArgumentException e) {
+                    HostObject.CurrentPowerShellTab.Invoke(WriteErrorToShell(e.Message));
+                    return;
+                }
 
                 using (StringReader reader = new StringReader(editor.Text))
                 {
@@ -69,10 +83,10 @@ namespace PoshPlusISEregexPlugin
 
                             foreach (Match match in rgxMatches)
                             {
-                                datagridRegexMatch currentMatch = new datagridRegexMatch();
-                                currentMatch.match = match;
-                                currentMatch.line = lineNum;
-                                currentMatch.index = match.Index;
+                                DatagridRegexMatch currentMatch = new DatagridRegexMatch();
+                                currentMatch.Match = match;
+                                currentMatch.Line = lineNum;
+                                currentMatch.Index = match.Index;
                                 currentMatch.StringLenght = match.Length;
 
                                 regexSearchMatches.Add(currentMatch);
@@ -85,11 +99,11 @@ namespace PoshPlusISEregexPlugin
         }
     }
 
-    public class datagridRegexMatch
+    public class DatagridRegexMatch
     {
-        public Match match { get; set; }
-        public int line { get; set; }
-        public int index { get; set; }
+        public Match Match { get; set; }
+        public int Line { get; set; }
+        public int Index { get; set; }
         public int StringLenght { get; set; }
     }
 }
